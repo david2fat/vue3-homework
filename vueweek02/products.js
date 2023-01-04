@@ -20,20 +20,20 @@ const path = 'david2fat-vue';
             this.getProducts();
           })
           .catch((err) => {
-            // alert(err.response.data.message);
+            alert(err.response.data.message);
             window.location = 'logintest.html';
           })
       },
       //#2渲染畫面
         getProducts() { //渲染畫面
-          axios.get(`${url}/api/${path}/admin/products}`)
+          axios.get(`${url}/api/${path}/admin/products`)
           .then((res) => {
             console.log(res);
             this.products = response.data.products;
             
           })
           .catch((err) => {
-            // alert(err.response.data.message);
+            alert(err.response.data.message);
           });
         },
         openProduct(item) {//不太懂
