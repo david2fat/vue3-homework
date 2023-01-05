@@ -29,7 +29,7 @@ const path = 'david2fat-vue';
           axios.get(`${url}/api/${path}/admin/products`)
           .then((res) => {
             console.log(res);
-            this.products = response.data.products;
+            this.products = res.data.products;
             
           })
           .catch((err) => {
@@ -43,9 +43,12 @@ const path = 'david2fat-vue';
       },
       mounted() {//畫面一開始先執行這段
         // 取出 Token
+        
         const token = document.cookie.replace(/(?:(?:^|.*;\s*)hexToken\s*=\s*([^;]*).*$)|^.*$/, '$1');
         axios.defaults.headers.common.Authorization = token;
-        this.checkAdmin()
+        this.checkAdmin();
+       
+
       }
       };
       createApp(app).mount('#app');
