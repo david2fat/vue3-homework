@@ -36,17 +36,14 @@ const path = 'david2fat-vue';
             alert(err.response.data.message);
           });
         },
-        // openProduct(item) {//不太懂
-        //   this.tempProduct = item;
-        // }
+        
         
       },
       mounted() {//畫面一開始先執行這段
         // 取出 Token
-        
         const token = document.cookie.replace(/(?:(?:^|.*;\s*)hexToken\s*=\s*([^;]*).*$)|^.*$/, '$1');
         axios.defaults.headers.common.Authorization = token;
-        this.checkAdmin();
+        this.checkAdmin();//執行這段程式碼進行確認
        
 
       }
