@@ -60,11 +60,11 @@
                 {{item.price  }}
               </td>
               <td width="150">
-                <span class="text-success">啟用</span>
-                <!-- <span>未啟用</span> -->
+                <span  v-if="item.is_enabled" class="text-success">啟用</span>
+                <span  v-else>未啟用</span>
               </td>
               <td width="120">
-                <button type="button"  v-on:click="openProduct(item)" class="btn btn-primary">查看細節</button>
+                <button type="button"  v-on:click="tempProduct={...item}" class="btn btn-primary">查看細節</button>
               </td>
             </tr>
           </tbody>

@@ -36,9 +36,9 @@ const path = 'david2fat-vue';
             alert(err.response.data.message);
           });
         },
-        openProduct(item) {//不太懂
-          this.tempProduct = item;
-        }
+        // openProduct(item) {//不太懂
+        //   this.tempProduct = item;
+        // }
         
       },
       mounted() {//畫面一開始先執行這段
