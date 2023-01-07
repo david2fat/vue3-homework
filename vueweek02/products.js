@@ -21,7 +21,7 @@ const path = 'david2fat-vue';
           })
           .catch((err) => {
             alert(err.response.data.message);
-            window.location = 'logintest.html';
+            window.location = 'index.html';
           })
       },
       //#2渲染畫面
