@@ -17,7 +17,7 @@ const path = 'david2fat-vue';
       checkAdmin() {
          axios.post(`${url}/api/user/check`)
           .then(() => {
-            this.getProducts();
+            this.renderProducts();
           })
           .catch((err) => {
             alert(err.response.data.message);
@@ -25,7 +25,7 @@ const path = 'david2fat-vue';
           })
       },
       //#2渲染畫面
-        getProducts() { //渲染畫面
+          renderProducts() { //渲染畫面
           axios.get(`${url}/api/${path}/admin/products`)
           .then((res) => {
             console.log(res);
