@@ -1,22 +1,25 @@
 // 產品資料格式
-const { createApp } = Vue;
-const url = 'https://vue3-course-api.hexschool.io/v2';
-const path = 'david2fat-week3';
-let productModal = '';
-let delProductModal = '';
+import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js';
+// const { createApp } = Vue;
+
+let productModal = "";
+let delProductModal = "";
+
       //1.建立元件
       //2.生成Vue應用程式
       //3.渲染到畫面
-const app={
+      
+// const app={
+ createApp({ 
         data() {
         return{
-          tempProduct :{
-            imagesUrl: [],
-            
-          },//單一顯示
+          apiUrl : 'https://vue3-course-api.hexschool.io/v2',
+          apiPath : 'david2fat-week3',
           products: [],
           isNew: false,
-          
+          tempProduct :{
+          imagesUrl: [],
+          },//單一顯示
         }
        },
        mounted() {//生命週期先執行
@@ -36,19 +39,22 @@ const app={
       },
     methods: {
       //#1確認身分
+      
       checkAdmin() {
-         axios.post(`${url}/api/user/check`)
+        const url=`${this.apiUrl}/api/user/check`;
+         axios.post(url)
           .then(() => {
             this.getProducts();
           })
           .catch((err) => {
             alert(err.response.data.message);
-            window.location = 'login.html';
+            window.location = 'login.html';S
           })
       },
       //#2渲染畫面
       getProducts() { //取得所有產品資料
-          axios.get(`${url}/api/${path}/admin/products/all`)
+        const url=`${this.apiUrl}/api/${this.apiPath}/admin/products/all`;
+          axios.get(url)
           .then((response) => {
             // console.log(response);
             this.products = response.data.products;
@@ -58,15 +64,15 @@ const app={
           });
       },
       addProducts() { //增加
-        let newUrl = `${url}/api/${path}/admin/product`;
-        let pathType = 'post';
+        let url = `${this.apiUrl}/api/${this.apiPath}/admin/product`;
+        let http = 'post';//平常狀態為新增
   
         if (!this.isNew) {
-          newUrl = `${url}/api/${path}/admin/product/${this.tempProduct.id}`;
-          pathType = 'put'
+          url = `${this.apiUrl}/api/${this.apiPath}/admin/product/${this.tempProduct.id}`;
+          http = 'put' //當不是isnew為更新
         }
   
-        axios[pathType](newUrl, { data: this.tempProduct })
+        axios[http](url, { data: this.tempProduct })
          .then((response) => {
           alert(response.data.message);
           productModal.hide();
@@ -76,24 +82,25 @@ const app={
         })
       
       },
-      openPage(isNew, item){    //打開產品頁面
-        if (isNew === 'new') {
+      openPage(isNew, item){    //打開產品編輯頁面
+        if (isNew === 'new') {//如果是新增狀態
           this.tempProduct = {
             imagesUrl: [],
           };
           this.isNew = true;
           productModal.show();
-        } else if (isNew === 'edit') {
+        } else if (isNew === 'edit') {//如果是編輯狀態
           this.tempProduct = { ...item };
           this.isNew = false;
           productModal.show();
-        } else if (isNew === 'delete') {
+        } else if (isNew === 'delete') {//如果是刪除狀態
           this.tempProduct = { ...item };
           delProductModal.show()
         }
       }, 
       delProduct() {
-        axios.delete(`${url}/api/${path}/admin/product/${this.tempProduct.id}`)
+        const url=`${this.apiUrl}/api/${this.apiPath}/admin/product/${this.tempProduct.id}`;
+        axios.delete(url)
         .then((response) => {
           alert(response.data.message);
           delProductModal.hide();
@@ -106,11 +113,12 @@ const app={
         this.tempProduct.imagesUrl = [];
         this.tempProduct.imagesUrl.push('');
       },
-    },  
-      };
+    }, 
+  }).mount('#app'); 
+      // };
 
       
-  createApp(app).mount('#app');
+  // createApp(app).mount('#app');
 
     
    
