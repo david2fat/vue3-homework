@@ -1,13 +1,7 @@
 
-
+<!DOCTYPE html>
 <html lang="zh-Hant-TW">
-  <!-- 產品頁面
 
-  頁面模板
-  取得產品資料串接 GET API
-  新增產品資料串接 POST API
-  刪除產品資料串接 DELETE API
-  編輯產品資料串接 PUT API -->
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,8 +10,8 @@
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-    
-    <body>
+</head>    
+<body>
 <div id="app">
   <div class="container">
     <div class="text-end mt-4">
@@ -47,7 +41,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in products":key="item.id">
+        <tr v-for="(item) in products":key="item.id">
           <td>{{item.category }}</td>
           <td>{{item.title }}</td>
           <td class="text-end">{{item.origin_price }} </td>
@@ -210,7 +204,7 @@
   </div>
   <!-- Modal -->
 </div>
-
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"

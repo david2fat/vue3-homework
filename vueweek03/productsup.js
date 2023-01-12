@@ -1,14 +1,19 @@
 // 產品資料格式
 import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js';
 // const { createApp } = Vue;
-
+// Vue.config.productionTip = false;
 let productModal = "";
 let delProductModal = "";
 
       //1.建立元件
       //2.生成Vue應用程式
       //3.渲染到畫面
-      
+      // <!-- 產品頁面
+      // 頁面模板
+      // 取得產品資料串接 GET API
+      // 新增產品資料串接 POST API
+      // 刪除產品資料串接 DELETE API
+      // 編輯產品資料串接 PUT API -->
 // const app={
  createApp({ 
         data() {
@@ -51,7 +56,6 @@ let delProductModal = "";
             window.location = 'login.html';S
           })
       },
-      //#2渲染畫面
       getProducts() { //取得所有產品資料
         const url=`${this.apiUrl}/api/${this.apiPath}/admin/products/all`;
           axios.get(url)
@@ -98,7 +102,7 @@ let delProductModal = "";
           delProductModal.show()
         }
       }, 
-      delProduct() {
+      delProduct() {//刪除函式
         const url=`${this.apiUrl}/api/${this.apiPath}/admin/product/${this.tempProduct.id}`;
         axios.delete(url)
         .then((response) => {
