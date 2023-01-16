@@ -1,8 +1,8 @@
 // 產品資料格式
 import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js';
+import pagination from './pagination.js';
 // const { createApp } = Vue;
 // Vue.config.productionTip = false;
-
 let productModal = "";
 let delProductModal = "";
 
@@ -28,7 +28,7 @@ let delProductModal = "";
           },//單一顯示
         }
        },
-       mounted() {//生命週期先執行
+    mounted() {//生命週期先執行
         productModal = new bootstrap.Modal(document.getElementById('productModal'), {
           keyboard: false//option
         });
@@ -54,11 +54,11 @@ let delProductModal = "";
           })
           .catch((err) => {
             alert(err.response.data.message);
-            window.location = 'login.html';
+            window.location = 'login.html';S
           })
       },
-      getProducts() { //取得所有產品資料
-        const url=`${this.apiUrl}/api/${this.apiPath}/admin/products/all`;
+      getProducts() { //取得所有產品資料  //去掉all才有pagination
+        const url=`${this.apiUrl}/api/${this.apiPath}/admin/products/?page=1`;
           axios.get(url)
           .then((response) => {
             // console.log(response);
@@ -118,7 +118,10 @@ let delProductModal = "";
         this.tempProduct.imagesUrl = [];
         this.tempProduct.imagesUrl.push('');
       },
-    }, 
+      },
+    components: {//區域元件
+      pagination,
+    },
   }).mount('#app'); 
       // };
 

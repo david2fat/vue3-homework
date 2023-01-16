@@ -63,6 +63,8 @@
         </tr>
       </tbody>
     </table>
+     <!-- 分頁元件 -->
+     <pagination ></pagination>
   </div>
 
   <!-- Modal openPage -->
@@ -96,17 +98,17 @@
                     </div>
                     <img class="img-fluid" :src="image">
                   </div>
-                  <template v-if="!tempProduct.imagesUrl.length || tempProduct.imagesUrl[tempProduct.imagesUrl.length - 1]">
+                  <div v-if="!tempProduct.imagesUrl.length || tempProduct.imagesUrl[tempProduct.imagesUrl.length - 1]">
                     <button class="btn btn-outline-primary btn-sm d-block w-100"
                       @click="tempProduct.imagesUrl.push('')">
                       新增圖片
                     </button>
-                  </template>
-                  <template v-else>
+                  </div>
+                  <div v-else>
                     <button class="btn btn-outline-danger btn-sm d-block w-100" @click="tempProduct.imagesUrl.pop()">
                       刪除圖片
                     </button>
-                  </template>
+                  </div>
                 </div>
                 <div v-else>
                   <button class="btn btn-outline-primary btn-sm d-block w-100" @click="createImages">
@@ -212,7 +214,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
     crossorigin="anonymous"></script>
-<script src="./productsup.js" type="module" ></script>
+<script src="/productsup-week4.js" type="module" ></script>
 
 </body>
 </html>
