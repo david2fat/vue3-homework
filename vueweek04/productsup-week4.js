@@ -26,7 +26,8 @@ let delProductModal = "";
           tempProduct :{
           imagesUrl: [],
           },//單一顯示
-        }
+          page:{} //外層page
+        };
        },
     mounted() {//生命週期先執行
         productModal = new bootstrap.Modal(document.getElementById('productModal'), {
@@ -57,12 +58,15 @@ let delProductModal = "";
             window.location = 'login.html';S
           })
       },
-      getProducts() { //取得所有產品資料  //去掉all才有pagination
-        const url=`${this.apiUrl}/api/${this.apiPath}/admin/products/?page=1`;
+      getProducts(page=1) { //預設參數1 //取得所有產品資料  //去掉all才有pagination
+        const url=`${this.apiUrl}/api/${this.apiPath}/admin/products/?page=${page}`;
           axios.get(url)
           .then((response) => {
             // console.log(response);
             this.products = response.data.products;
+            console.log(response.data);
+            this.page=response.data.pagination;//存取page資訊
+
             })
           .catch((err) => {
             alert(err.response.data.message);
