@@ -15,8 +15,7 @@ let delProductModal = "";
       // 新增產品資料串接 POST API
       // 刪除產品資料串接 DELETE API
       // 編輯產品資料串接 PUT API -->
-// const app={
- createApp({ 
+ const app=createApp({ 
         data() {
         return{
           apiUrl : 'https://vue3-course-api.hexschool.io/v2',
@@ -126,10 +125,14 @@ let delProductModal = "";
     components: {//區域元件
       pagination,
     },
-  }).mount('#app'); 
+  }); 
       // };
-
-      
+//modal 元件     
+// app.components('product-modal',{
+//   props:['temProduct'],
+//   template:'product-modal-template',
+// });
+app.mount('#app');     
   // createApp(app).mount('#app');
 
     
