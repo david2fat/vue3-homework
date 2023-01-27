@@ -127,11 +127,11 @@ let delProductModal = "";
     },
   }); 
       // };
-//modal 元件     
-// app.components('product-modal',{
-//   props:['temProduct'],
-//   template:'product-modal-template',
-// });
+// modal 元件     
+app.component('product-modal',{
+  props:['temProduct','addProducts'],
+  template:'product-modal-template',
+});
 app.mount('#app');     
   // createApp(app).mount('#app');
 
