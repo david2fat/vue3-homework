@@ -1,9 +1,25 @@
-import { createApp } from 'https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.29/vue.esm-browser.min.js';
+// import { createApp } from 'https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.29/vue.esm-browser.min.js';
 // 1 點擊按鈕 modal展開 取得遠端資料 呈現資料
 // 2 點擊按鈕 取得遠端資料 modal展開  呈現資料 V 老師示範
 // 取得選端資料 外部元件 modal元件執行
 const apiUrl = 'https://vue3-course-api.hexschool.io';
 const apiPath = 'david2fat-week5v3';
+
+
+// 全部加入(CDN 版本)定義規則
+Object.keys(VeeValidateRules).forEach(rule => {
+  if (rule !== 'default') {
+    VeeValidate.defineRule(rule, VeeValidateRules[rule]);
+  }
+});
+// 讀取外部的資源
+VeeValidateI18n.loadLocaleFromURL('./zh_TW.json');
+
+// Activate the locale
+VeeValidate.configure({
+  generateMessage: VeeValidateI18n.localize('zh_TW'),
+  validateOnInput: true, // 調整為：輸入文字時，就立即進行驗證
+});
 const productModal={
   //當ＩＤ有變動。取得遠端資料 呈現modal 外層html哪個ＩＤ顯是內層哪個ＩＤ
   props:['id','addToCart','openModal'], 
@@ -12,8 +28,10 @@ const productModal={
       modal:{},
       tempProduct:{},
       qty:1,
+      
     };
   },
+  
   template:'#userProductModal',//template 樣板自面值 x-template vite
   //監聽id 傳入的值
   watch:{
@@ -45,7 +63,7 @@ const productModal={
 };
 // 
 
-const app = createApp({
+const app = Vue.createApp({
   data() {
     return {
       products: [],
@@ -53,6 +71,15 @@ const app = createApp({
       cart:{},
       qty:'',
       loadingItem:'',//存id
+      form:{
+        user: {
+          name: '',
+          email: '',
+          tel: '',
+          address: '',
+         },
+        message: '',
+      },
       
     };
   },
@@ -112,12 +139,28 @@ const app = createApp({
        this.loadingItem='';
     });
    },
-  
+   isPhone(value) {
+    const phoneNumber = /^(09)[0-9]{8}$/
+    return phoneNumber.test(value) ? true : '需要正確的電話號碼'
+   },
+   onSubmit() {
+    const order = this.form;
+    const url = `${apiUrl}/v2/api/${apiPath}/order`;
+    axios.post(url,{data:order})//
+    .then((response) => {
+      console.log('已完成結帳：', response.data.message);
+     
+      alert(response.data.message);
+      this.$refs.form.resetForm();
+      this.getCarts();
+    })
+   },
   },
   mounted() {
     this.getProducts();
     this.getCarts();
     console.log('生命週期開始');
+    
   },
   components:{
     productModal,
@@ -125,4 +168,13 @@ const app = createApp({
 });
 
 // app.component("productModal",productModal);
+
+//註冊全域的表單驗證元件（VForm, VField, ErrorMessage）
+app.component('VForm', VeeValidate.Form);
+app.component('VField', VeeValidate.Field);
+app.component('ErrorMessage', VeeValidate.ErrorMessage);
+// ------------------------
+app.use(VueLoading.LoadingPlugin,
+  {color: 'red'});
+
 app.mount('#app');
